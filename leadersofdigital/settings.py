@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'accelerator',
     'health',
     'organization',
     'users',
@@ -114,7 +115,6 @@ AUTH_USER_MODEL = 'users.Profile'
 
 LOGIN_URL = 'application:login'
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -136,6 +136,12 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_URL = '/media/'
+
+MEDIA_DIRS = [
+    os.path.join(BASE_DIR, 'media')
 ]
 
 # Activate Django-Heroku.
