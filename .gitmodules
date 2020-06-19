@@ -1,0 +1,6 @@
+[submodule "rebus-hackathon-ui"]
+	path = rebus-hackathon-ui
+	url = https://github.com/ilya-pro/rebus-hackathon-ui
+[submodule "ui"]
+	path = ui
+	url = https://github.com/ilya-pro/rebus-hackathon-ui
