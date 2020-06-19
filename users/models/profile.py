@@ -28,7 +28,7 @@ class Profile(AbstractUser):
         on_delete=models.SET_NULL,
         verbose_name='Должность',
     )
-    phone = models.EmailField(
+    phone = models.CharField(
         max_length=32,
         verbose_name='Телефон',
     )
