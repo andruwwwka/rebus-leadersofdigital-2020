@@ -1,8 +1,43 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 from organization.models import Department
 from . import Position
+
+
+class ProfileManager(BaseUserManager):
+    """Менеджер для созадния пользователей."""
+
+    def _create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('Данный адрес электронной почты должен быть установлен')
+        email = self.normalize_email(email)
+        department = extra_fields.get('department')
+        if isinstance(department, int) or isinstance(department, str) and department.isdigit():
+            extra_fields['department'] = Department.objects.get(id=department)
+        position = extra_fields.get('position')
+        if isinstance(position, int) or isinstance(position, str) and position.isdigit():
+            extra_fields['position'] = Position.objects.get(id=department)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, email, password=None, **extra_fields):
+        """Создает и возвращает `User` с адресом электронной почты, именем пользователя и паролем."""
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password, **extra_fields):
+        """Создает и возвращает пользователя с правами суперпользователя (администратора)."""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Суперпользователь должен иметь is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Суперпользователь должен иметь is_superuser=True.')
+        return self._create_user(email, password, **extra_fields)
 
 
 class Profile(AbstractUser):
@@ -35,6 +70,8 @@ class Profile(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['department', 'position']
+
+    objects = ProfileManager()
 
     def __str__(self):
         return self.email
