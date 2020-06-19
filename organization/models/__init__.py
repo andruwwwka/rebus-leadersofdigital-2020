@@ -1,1 +1,1 @@
-from .department import Department
+from .department import Department  # noqa: F401
