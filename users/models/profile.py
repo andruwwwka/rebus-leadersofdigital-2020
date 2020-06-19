@@ -28,15 +28,15 @@ class Profile(AbstractUser):
         on_delete=models.SET_NULL,
         verbose_name='Должность',
     )
-    phone = models.EmailField(
-        max_length=32,
-        verbose_name='Телефон',
-    )
     photo = models.FileField(
         verbose_name='Аватар',
         null=True,
         blank=True,
         upload_to='avatars/',
+    )
+    phone = models.CharField(
+        max_length=32,
+        verbose_name='Телефон',
     )
 
     USERNAME_FIELD = 'email'
