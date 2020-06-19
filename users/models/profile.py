@@ -32,6 +32,12 @@ class Profile(AbstractUser):
         max_length=32,
         verbose_name='Телефон',
     )
+    photo = models.FileField(
+        verbose_name='Аватар',
+        null=True,
+        blank=True,
+        upload_to='avatars/',
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['department', 'position']
