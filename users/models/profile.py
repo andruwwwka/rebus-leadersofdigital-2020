@@ -63,6 +63,12 @@ class Profile(AbstractUser):
         on_delete=models.SET_NULL,
         verbose_name='Должность',
     )
+    photo = models.FileField(
+        verbose_name='Аватар',
+        null=True,
+        blank=True,
+        upload_to='avatars/',
+    )
     phone = models.CharField(
         max_length=32,
         verbose_name='Телефон',
