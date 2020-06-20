@@ -1,9 +1,5 @@
 from django.db import models
 
-from users.models import Profile
-from .badge import Badge
-from .reward import Reward
-
 
 class History(models.Model):
     """Модель истории назначения наград/бейджей"""
@@ -11,22 +7,22 @@ class History(models.Model):
         verbose_name='Количество',
     )
     badge = models.ForeignKey(
-        Badge,
+        'Badge',
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
         verbose_name='Бейдж',
     )
     reward = models.ForeignKey(
-        Reward,
+        'Reward',
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
         verbose_name='Награда',
     )
     profile = models.ForeignKey(
-        Profile,
-        on_delete=models.SET_NULL,
+        'users.Profile',
+        on_delete=models.CASCADE,
         verbose_name='Владелец',
     )
     receiving_date = models.DateTimeField(
