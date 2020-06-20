@@ -1,14 +1,24 @@
 from django.db import models
 
-from .history.models import History
+from .history import History
 
 
 class BaseAchievement(models.Model):
-    """Базовый класс для ачивок."""
-    name = models.CharField()
-    uid = models.SlugField()
-    cost = models.IntegerField()
-    archive = models.BooleanField()
+    """Базовый класс для бейджей/наград"""
+    name = models.CharField(
+        max_length=128,
+        verbose_name='Наименование бейджа/награды',
+    )
+    uid = models.SlugField(
+        verbose_name='Идентификатор',
+    )
+    cost = models.IntegerField(
+        verbose_name='Стоимость',
+    )
+    archive = models.NullBooleanField(
+        default=False,
+        verbose_name='Архивный'
+    )
 
     target_attribute = None
 
@@ -26,3 +36,6 @@ class BaseAchievement(models.Model):
         }
         transaction = History(**trans_data)
         return transaction
+
+    def __str__(self):
+        return self.name
