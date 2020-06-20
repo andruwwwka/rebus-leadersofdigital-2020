@@ -29,9 +29,10 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('api/users/', include('users.urls')),
     path('api/accelerator/', include('accelerator.urls')),
     path('api/health/', include('health.urls')),
+    path('api/ratings/', include('ratings.urls')),
+    path('api/users/', include('users.urls')),
     path(
         '',
         schema_view.with_ui('swagger', cache_timeout=0),
