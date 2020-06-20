@@ -73,6 +73,12 @@ class Profile(AbstractUser):
         blank=True,
         upload_to='avatars/',
     )
+    little_avatar = models.FileField(
+        verbose_name='Малый аватар',
+        null=True,
+        blank=True,
+        upload_to='avatars/',
+    )
     phone = models.CharField(
         max_length=32,
         blank=True,
