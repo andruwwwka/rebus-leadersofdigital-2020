@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accelerator',
     'health',
     'organization',
+    'ratings',
     'users',
 ]
 
