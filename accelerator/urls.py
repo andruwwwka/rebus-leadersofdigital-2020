@@ -1,13 +1,7 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from .resources.tender import TenderViewSet
 
-
-tender_list = TenderViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
-})
-
-urlpatterns = [
-    path('tenders/', tender_list, name='tender-list'),
-]
+router = DefaultRouter()
+router.register(r'tenders', TenderViewSet, basename='tenders')
+urlpatterns = router.urls

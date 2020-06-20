@@ -1,6 +1,4 @@
 from rest_framework import serializers, viewsets, permissions
-from rest_framework.decorators import action
-from rest_framework.response import Response
 
 from accelerator.models import Tender
 
@@ -31,11 +29,7 @@ class TenderSerializer(serializers.ModelSerializer):
 
 
 class TenderViewSet(viewsets.ModelViewSet):
-    """Представление идеи/предложения"""
+    """Представление идеи/предложения."""
     permission_classes = [permissions.AllowAny]
-
-    @action(detail=True)
-    def list(self, request, *args, **kwargs):
-        tenders = Tender.objects.all()
-        ser = TenderSerializer(tenders, many=True)
-        return Response(ser.data)
+    serializer_class = TenderSerializer
+    queryset = Tender.objects.all()
