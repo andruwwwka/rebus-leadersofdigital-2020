@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import serializers
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -34,6 +35,9 @@ class Login(APIView):
     permission_classes = [AllowAny]
     serializer_class = LoginSerializer
 
+    @swagger_auto_schema(
+        request_body=LoginSerializer
+    )
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
