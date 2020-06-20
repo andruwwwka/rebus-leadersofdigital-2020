@@ -30,6 +30,5 @@ class TenderSerializer(serializers.ModelSerializer):
 
 class TenderViewSet(viewsets.ModelViewSet):
     """Представление идеи/предложения."""
-    permission_classes = [permissions.AllowAny]
     serializer_class = TenderSerializer
     queryset = Tender.objects.all()
