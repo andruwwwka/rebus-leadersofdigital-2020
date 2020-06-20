@@ -2,41 +2,40 @@ from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from organization.models import Department
-from users.models import Position, Profile
+from users.models import Profile
 
 
-class DepartmentSerializer(serializers.ModelSerializer):
-    """Сериализатор Департамента"""
+class ProfileSerializer(serializers.ModelSerializer):
+    """Сериализатор профиля пользователя."""
+
+    department = serializers.SerializerMethodField()
+    position = serializers.SerializerMethodField()
+
     class Meta:
-        model = Department
-        fields = ['name']
+        model = Profile
+        fields = (
+            'email',
+            'last_name',
+            'first_name',
+            'patronymic',
+            'photo',
+            'phone',
+            'internal_phone',
+            'city',
+            'birthday',
+            'department',
+            'position',
+        )
 
+    def get_department(self, obj):
+        return obj.department.name
 
-class PositionSerializer(serializers.ModelSerializer):
-    """Сериализатор Должностей"""
-    class Meta:
-        model = Position
-        fields = ['post']
-
-
-class ProfileSerializer(serializers.Serializer):
-    """Сериализатор профиля пользователя"""
-    email = serializers.EmailField()
-    last_name = serializers.CharField()
-    first_name = serializers.CharField()
-    patronymic = serializers.CharField()
-    photo = serializers.FileField()
-    phone = serializers.CharField()
-    internal_phone = serializers.CharField()
-    city = serializers.CharField()
-    birthday = serializers.DateField()
-    department = DepartmentSerializer()
-    position = PositionSerializer()
+    def get_position(self, obj):
+        return obj.position.post
 
 
 class Profiles(APIView):
-    """Работа с профилем"""
+    """Информация профиля для личного кабинета."""
     serializer_class = ProfileSerializer
 
     def get(self, request):
