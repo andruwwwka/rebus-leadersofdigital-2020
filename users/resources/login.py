@@ -25,7 +25,7 @@ class LoginSerializer(serializers.Serializer):
                 'Пользователь деактивирован.'
             )
         return {
-            'email': user.email,
+            'token': user.token,
         }
 
 
