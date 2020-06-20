@@ -26,17 +26,12 @@ SECRET_KEY = 'v2#k2hii767#q92vcdhm3xbok(f9f9ekwu^fs@1&)i*(cv1jqr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'ilya-pro.github.io',
-    '127.0.0.1',
-    'localhost',
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
