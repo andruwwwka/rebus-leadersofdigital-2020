@@ -1,5 +1,4 @@
-from rest_framework import serializers, viewsets, permissions, mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework import serializers, viewsets, permissions
 
 from accelerator.models import Team
 from users.models import Profile
@@ -11,23 +10,20 @@ class PartnerSerializer(serializers.ModelSerializer):
         fields = ['last_name', 'first_name', 'patronymic']
 
 
-class TeamSerializer(serializers.ModelSerializer):
+class DetailTeamSerializer(serializers.ModelSerializer):
+    """Сериализатор команды для создания/обновления объекта"""
+
+    class Meta:
+        model = Team
+        fields = '__all__'
+
+
+class TeamSerializer(DetailTeamSerializer):
     """Сериализатор команды"""
     leader = serializers.SerializerMethodField()
     expert = serializers.SerializerMethodField()
     idea = serializers.SerializerMethodField()
     partner = PartnerSerializer(many=True, read_only=False)
-
-    class Meta:
-        model = Team
-        fields = [
-            'id',
-            'caption',
-            'leader',
-            'expert',
-            'partner',
-            'idea',
-        ]
 
     def get_leader(self, obj):
         return ' '.join([obj.leader.last_name, obj.leader.first_name, obj.leader.patronymic])
@@ -42,23 +38,6 @@ class TeamSerializer(serializers.ModelSerializer):
         return obj.idea.caption
 
 
-class DetailTeamSerializer(serializers.ModelSerializer):
-    """Сериализатор команды для создания/обновления"""
-
-
-    class Meta:
-        model = Team
-        fields = [
-            'id',
-            'caption',
-            'leader',
-            'expert',
-            'partner',
-            'idea',
-        ]
-
-
-
 class TeamViewSet(viewsets.ModelViewSet):
     """Представление команды"""
     permission_classes = [permissions.AllowAny]
@@ -67,8 +46,9 @@ class TeamViewSet(viewsets.ModelViewSet):
     available_serializers = {
         'list': TeamSerializer,
         'destroy': TeamSerializer,
+        'retrieve': TeamSerializer,
 
-        'retrieve': DetailTeamSerializer,
+        'update': DetailTeamSerializer,
         'partial_update': DetailTeamSerializer,
         'create': DetailTeamSerializer,
     }
