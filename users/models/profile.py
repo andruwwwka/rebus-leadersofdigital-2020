@@ -9,7 +9,7 @@ from . import Position
 
 
 class ProfileManager(BaseUserManager):
-    """Менеджер для созадния пользователей."""
+    """Менеджер для создания пользователей."""
 
     def _create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -52,6 +52,8 @@ class Profile(AbstractUser):
     )
     patronymic = models.CharField(
         max_length=128,
+        blank=True,
+        null=True,
         verbose_name='Отчество',
     )
     department = models.ForeignKey(
@@ -74,7 +76,23 @@ class Profile(AbstractUser):
     )
     phone = models.CharField(
         max_length=32,
+        blank=True,
         verbose_name='Телефон',
+    )
+    internal_phone = models.CharField(
+        max_length=32,
+        blank=True,
+        verbose_name='Внутренний телефон',
+    )
+    city = models.CharField(
+        max_length=128,
+        blank=True,
+        verbose_name='Город',
+    )
+    birthday = models.DateField(
+        verbose_name='Дата рождения',
+        blank=True,
+        null=True,
     )
 
     USERNAME_FIELD = 'email'
