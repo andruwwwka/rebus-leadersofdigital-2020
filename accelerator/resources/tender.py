@@ -25,7 +25,7 @@ class TenderSerializer(serializers.ModelSerializer):
         return ' '.join([obj.owner.last_name, obj.owner.first_name, obj.owner.patronymic])
 
     def get_area(self, obj):
-        return obj.area.name or ''
+        return obj.area.name if obj.area else ''
 
 
 class TenderViewSet(viewsets.ModelViewSet):
