@@ -20,7 +20,7 @@ class ProfileManager(BaseUserManager):
             extra_fields['department'] = Department.objects.get(id=department)
         position = extra_fields.get('position')
         if isinstance(position, int) or isinstance(position, str) and position.isdigit():
-            extra_fields['position'] = Position.objects.get(id=department)
+            extra_fields['position'] = Position.objects.get(id=position)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
