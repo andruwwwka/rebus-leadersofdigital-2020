@@ -36,6 +36,7 @@ urlpatterns = [
         name='schema-swagger-ui'
     ),
     path('api/users/', include('users.urls')),
+    path('api/accelerator/', include('accelerator.urls')),
     path('api/health/', include('health.urls')),
     # path('admin/', admin.site.urls),
 ]

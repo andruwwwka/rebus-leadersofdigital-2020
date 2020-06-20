@@ -53,7 +53,6 @@ class Profile(AbstractUser):
     patronymic = models.CharField(
         max_length=128,
         blank=True,
-        null=True,
         verbose_name='Отчество',
     )
     department = models.ForeignKey(
