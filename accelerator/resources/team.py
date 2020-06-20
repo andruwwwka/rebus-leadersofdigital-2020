@@ -40,8 +40,6 @@ class TeamSerializer(DetailTeamSerializer):
 
 class TeamViewSet(viewsets.ModelViewSet):
     """Представление команды"""
-    permission_classes = [permissions.AllowAny]
-
     queryset = Team.objects.all()
     available_serializers = {
         'list': TeamSerializer,
