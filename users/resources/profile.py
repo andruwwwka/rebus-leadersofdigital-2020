@@ -19,6 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'first_name',
             'patronymic',
             'photo',
+            'little_avatar',
             'phone',
             'internal_phone',
             'city',
