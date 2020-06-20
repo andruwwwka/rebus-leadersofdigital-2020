@@ -21,11 +21,11 @@ class Tender(models.Model):
         default='technology',
         verbose_name='Направление/Категория',
     )
-    presentation = models.FileField(
+    presentation = models.CharField(
+        max_length=1024,
         verbose_name='Файлы презентации',
         null=True,
         blank=True,
-        upload_to='files/',
     )
     status = models.CharField(
         max_length=16,
