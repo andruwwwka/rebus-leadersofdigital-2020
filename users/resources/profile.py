@@ -10,6 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     department = serializers.SerializerMethodField()
     position = serializers.SerializerMethodField()
+    birthday = serializers.DateField(format="%d.%m.%Y")
 
     class Meta:
         model = Profile
