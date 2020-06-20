@@ -1,3 +1,6 @@
+import jwt
+from datetime import datetime, timedelta
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
@@ -99,3 +102,22 @@ class Profile(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    def _generate_jwt_token(self):
+        """
+        Создает веб-токен JSON, в котором хранится идентификатор
+        этого пользователя и срок его действия
+        составляет 60 дней в будущем.
+        """
+        dt = datetime.now() + timedelta(days=60)
+
+        token = jwt.encode({
+            'id': self.pk,
+            'exp': int(dt.strftime('%s'))
+        }, settings.SECRET_KEY, algorithm='HS256')
+
+        return token.decode('utf-8')
+
+    @property
+    def token(self):
+        return self._generate_jwt_token()
