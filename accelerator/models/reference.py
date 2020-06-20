@@ -6,7 +6,8 @@ TENDER_STATUSES = (
     ('expertise', 'Экспертиза'),
     ('ready_work', 'Формирование команды'),
     ('work', 'В работе'),
-    ('finish', 'Завершено')
+    ('finish', 'Завершено'),
+    ('cancel', 'Отменена')
 )
 
 TENDER_TYPES = (
