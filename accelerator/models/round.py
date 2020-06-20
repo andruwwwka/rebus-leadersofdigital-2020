@@ -1,6 +1,6 @@
 from django.db import models
 
-from accelerator.models import Team
+from accelerator.models import Team, Tender
 
 
 class Round(models.Model):
@@ -21,16 +21,16 @@ class Round(models.Model):
     finish_date = models.DateTimeField(
         verbose_name='Дата завершения раунда',
     )
-    team = models.ForeignKey(
-        Team,
+    tender = models.ForeignKey(
+        Tender,
         null=True,
         on_delete=models.SET_NULL,
-        verbose_name='Команда',
+        verbose_name='Идея/Предложение',
     )
 
     def __str__(self):
         return '{0}: {1}/{2}'.format(
-            self.team.idea.caption,
+            self.tender.caption,
             self.start_date.strftime('%d.%m.%Y'),
             self.finish_date.strftime('%d.%m.%Y'),
         )
