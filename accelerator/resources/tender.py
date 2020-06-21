@@ -1,12 +1,15 @@
 from rest_framework import serializers, viewsets
 
-from accelerator.models import Tender
+from ..models import Comment, Tender, Vote
 
 
 class TenderSerializer(serializers.ModelSerializer):
     """Сериализатор идей/предложений"""
     owner = serializers.SerializerMethodField()
     area = serializers.SerializerMethodField()
+    like_count = serializers.SerializerMethodField()
+    dislike_count = serializers.SerializerMethodField()
+    comment_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Tender
@@ -26,6 +29,15 @@ class TenderSerializer(serializers.ModelSerializer):
 
     def get_area(self, obj):
         return obj.area.name if obj.area else ''
+
+    def like_count(self, obj):
+        return Vote.objects.filter(content_object=obj, interestingly=True).count()
+
+    def dislike_count(self, obj):
+        return Vote.objects.filter(content_object=obj, interestingly=False).count()
+
+    def omment_count(self, obj):
+        return Comment.objects.filter(tender=obj).count()
 
 
 class TenderViewSet(viewsets.ModelViewSet):
