@@ -33,7 +33,7 @@ class TenderSerializer(serializers.ModelSerializer):
 
     def get_area(self, obj):
         return obj.area.name if obj.area else ''
-    
+
     def _calculate_votes_count(self, obj, interestingly):
         obj_type = ContentType.objects.get_for_model(obj)
         votes = Vote.objects.filter(
