@@ -22,7 +22,8 @@ def create_votes_for_tenders(apps, schema_editor):
         if not vote_already_exists:
             Vote.objects.create(
                 voter=profile,
-                content_object=tender,
+                content_type=tender_type,
+                object_id=tender.id,
                 interestingly=bool(random.getrandbits(1))
             )
 
