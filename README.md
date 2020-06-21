@@ -19,16 +19,18 @@
  
 [Презентация решения](https://drive.google.com/file/d/1fIj-vB-q0hPRVvg63zHHjQiR28VmgUYf/view?usp=sharing).
 
-Макеты реализованы в axure. С ними можно ознакомиться по [адресу](https://ueqyau.axshare.com/#g=1&p=rebus_19_06_20). Пароль: **Rebus190620**.
+Макеты реализованы в axshure. С ними можно ознакомиться по [адресу](https://ueqyau.axshare.com/#g=1&p=rebus_19_06_20). Пароль: **Rebus190620**.
 
 Приложение доступно по [адресу](https://ilya-pro.github.io/rebus-hackathon-gh-pages/)
 
 [Документация к методам API](https://rebus-leadersofdigital-2020.herokuapp.com)
  
 Логин и пароль для доступа к приложению и API: kulibin@gpb.ru / test
+
 ## Команда
+
 **Роман Демагин**  
-<demagin.roman@mail.ru>  
+<roman.demagin@gmail.com>  
 *капитан команды, дизайнер 
 и проектировщик интерфейсов*
  

@@ -8,9 +8,12 @@ from .models import Profile
 
 
 class JWTAuthentication(authentication.BaseAuthentication):
+    """Логика аутентификации по JWT токену."""
+
     authentication_header_prefix = 'Bearer'
 
     def authenticate(self, request):
+        """Разбор авторизационного заголовка и аутентификация."""
         request.user = None
         auth_header = authentication.get_authorization_header(request).split()
         auth_header_prefix = self.authentication_header_prefix.lower()
@@ -27,20 +30,18 @@ class JWTAuthentication(authentication.BaseAuthentication):
         return self._authenticate_credentials(request, token)
 
     def _authenticate_credentials(self, request, token):
+        """Аутентификация пользователя."""
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
         except Exception:
             msg = 'Аутентификация невозможна. Токен невозможно декодировать'
             raise exceptions.AuthenticationFailed(msg)
-
         try:
             user = Profile.objects.get(pk=payload['id'])
         except Profile.DoesNotExist:
             msg = 'Пользователь не найден.'
             raise exceptions.AuthenticationFailed(msg)
-
         if not user.is_active:
             msg = 'Пользователь деактивирован.'
             raise exceptions.AuthenticationFailed(msg)
-
         return (user, token)

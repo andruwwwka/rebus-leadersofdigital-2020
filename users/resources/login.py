@@ -39,6 +39,7 @@ class Login(APIView):
         request_body=LoginSerializer
     )
     def post(self, request):
+        """Метод обработки запроса на авторизацию."""
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.validated_data)

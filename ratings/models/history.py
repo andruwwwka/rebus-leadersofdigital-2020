@@ -2,7 +2,7 @@ from django.db import models
 
 
 class History(models.Model):
-    """Модель истории назначения наград/бейджей"""
+    """Модель истории назначения наград/бейджей."""
     amount = models.IntegerField(
         verbose_name='Количество',
     )

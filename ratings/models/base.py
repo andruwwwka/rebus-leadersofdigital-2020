@@ -4,7 +4,7 @@ from .history import History
 
 
 class BaseAchievement(models.Model):
-    """Базовый класс для бейджей/наград"""
+    """Базовый класс для бейджей/наград."""
     name = models.CharField(
         max_length=128,
         verbose_name='Наименование бейджа/награды',

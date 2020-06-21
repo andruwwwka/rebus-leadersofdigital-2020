@@ -3,7 +3,7 @@ from django.db import migrations
 
 
 def create_departments(apps, schema_editor):
-    """Создание подразделений."""
+    """Создание тестовых подразделений."""
     departments = [
         {
             'name': 'Департамент комплексных проектов',
@@ -19,7 +19,7 @@ def create_departments(apps, schema_editor):
 
 
 def create_positions(apps, schema_editor):
-    """Создание должности."""
+    """Создание тестовой должности."""
     Position = apps.get_model('users', 'Position')
     Position.objects.create(
         post="Специалист"

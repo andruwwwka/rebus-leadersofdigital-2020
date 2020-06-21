@@ -15,4 +15,3 @@ class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
 
     serializer_class = HistorySerializer
     queryset = History.objects.all()
-

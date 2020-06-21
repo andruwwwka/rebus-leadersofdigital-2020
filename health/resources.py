@@ -4,7 +4,9 @@ from rest_framework.views import APIView
 
 
 class Health(APIView):
+    """Представления проверки работоспособности API."""
     permission_classes = [AllowAny]
 
     def get(self, request, format=None):
+        """Метод формирования ответа педставления."""
         return Response({'alive': True})

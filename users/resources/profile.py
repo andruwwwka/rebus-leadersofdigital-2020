@@ -31,9 +31,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         )
 
     def get_department(self, obj):
+        """Получение названия подразделения, в котором работает сотрудник."""
         return obj.department.name
 
     def get_position(self, obj):
+        """Получение наименования должности сотрудника."""
         return obj.position.post
 
 
@@ -42,6 +44,7 @@ class Profiles(APIView):
     serializer_class = ProfileSerializer
 
     def get(self, request):
+        """Получение профиля пользователя."""
         profile = request.user
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)

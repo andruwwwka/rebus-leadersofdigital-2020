@@ -4,14 +4,14 @@ from ratings.models import Badge
 
 
 class BadgeSerializer(serializers.ModelSerializer):
-    """Сериализатор бейджей"""
+    """Сериализатор бейджей."""
     class Meta:
         model = Badge
         fields = '__all__'
 
 
 class BadgeViewSet(viewsets.ModelViewSet):
-    """Представление бейджей"""
+    """Представление бейджей."""
 
     serializer_class = BadgeSerializer
     queryset = Badge.objects.filter(archive=False)

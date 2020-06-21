@@ -109,10 +109,9 @@ class Profile(AbstractUser):
         return self.email
 
     def _generate_jwt_token(self):
-        """
-        Создает веб-токен JSON, в котором хранится идентификатор
-        этого пользователя и срок его действия
-        составляет 60 дней в будущем.
+        """Создает веб-токен JSON.
+
+        В нем в котором хранится идентификатор этого пользователя и срок его действия составляет 60 дней в будущем.
         """
         dt = datetime.now() + timedelta(days=60)
 
@@ -125,4 +124,5 @@ class Profile(AbstractUser):
 
     @property
     def token(self):
+        """Получение JWT токена авторизации."""
         return self._generate_jwt_token()
