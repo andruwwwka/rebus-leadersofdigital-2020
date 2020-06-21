@@ -21,7 +21,10 @@ class TenderSerializer(serializers.ModelSerializer):
             'status',
             'owner',
             'tender_type',
-            'area'
+            'area',
+            'like_count',
+            'dislike_count',
+            'comment_count',
         ]
 
     def get_owner(self, obj):
