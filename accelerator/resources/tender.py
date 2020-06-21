@@ -56,4 +56,13 @@ class TenderSerializer(serializers.ModelSerializer):
 class TenderViewSet(viewsets.ModelViewSet):
     """Представление идеи/предложения."""
     serializer_class = TenderSerializer
-    queryset = Tender.objects.all()
+
+    def get_queryset(self):
+        """Получение списка предложений.
+
+        Предложения могут фильтроваться по владельцу, например, для отображения в ЛК."""
+        queryset = Tender.objects.all()
+        owner_id = self.request.query_params.get('owner', None)
+        if owner_id is not None:
+            queryset = queryset.filter(id=owner_id)
+        return queryset
