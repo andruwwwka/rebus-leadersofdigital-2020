@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers, viewsets
 
 from ..models import Comment, Tender, Vote
@@ -32,12 +33,21 @@ class TenderSerializer(serializers.ModelSerializer):
 
     def get_area(self, obj):
         return obj.area.name if obj.area else ''
+    
+    def _calculate_votes_count(self, obj, interestingly):
+        obj_type = ContentType.objects.get_for_model(obj)
+        votes = Vote.objects.filter(
+            content_type__pk=obj_type.id,
+            object_id=obj.id,
+            interestingly=interestingly
+        )
+        return votes.count()
 
     def get_like_count(self, obj):
-        return Vote.objects.filter(content_object=obj, interestingly=True).count()
+        return self._calculate_votes_count(obj, True)
 
     def get_dislike_count(self, obj):
-        return Vote.objects.filter(content_object=obj, interestingly=False).count()
+        return self._calculate_votes_count(obj, False)
 
     def get_comment_count(self, obj):
         return Comment.objects.filter(tender=obj).count()
