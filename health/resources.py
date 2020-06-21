@@ -8,5 +8,5 @@ class Health(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, format=None):
-        """Метод формирования ответа педставления."""
+        """Метод проверки работоспособности API."""
         return Response({'alive': True})
