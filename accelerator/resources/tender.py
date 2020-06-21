@@ -33,13 +33,13 @@ class TenderSerializer(serializers.ModelSerializer):
     def get_area(self, obj):
         return obj.area.name if obj.area else ''
 
-    def like_count(self, obj):
+    def get_like_count(self, obj):
         return Vote.objects.filter(content_object=obj, interestingly=True).count()
 
-    def dislike_count(self, obj):
+    def get_dislike_count(self, obj):
         return Vote.objects.filter(content_object=obj, interestingly=False).count()
 
-    def omment_count(self, obj):
+    def get_comment_count(self, obj):
         return Comment.objects.filter(tender=obj).count()
 
 
