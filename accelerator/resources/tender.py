@@ -5,7 +5,7 @@ from ..models import Comment, Tender, Vote
 
 
 class TenderSerializer(serializers.ModelSerializer):
-    """Сериализатор идей/предложений"""
+    """Сериализатор идей/предложений."""
     owner = serializers.SerializerMethodField()
     area = serializers.SerializerMethodField()
     like_count = serializers.SerializerMethodField()
@@ -29,12 +29,18 @@ class TenderSerializer(serializers.ModelSerializer):
         ]
 
     def get_owner(self, obj):
+        """Получение ФИО автора идеи."""
         return ' '.join([obj.owner.last_name, obj.owner.first_name, obj.owner.patronymic])
 
     def get_area(self, obj):
+        """Получение наименования департамента, в рамках которого видно предложение.
+
+        Если департамент не указан, то предложение считается глобальным.
+        """
         return obj.area.name if obj.area else ''
 
     def _calculate_votes_count(self, obj, interestingly):
+        """Вычисление количества голосов."""
         obj_type = ContentType.objects.get_for_model(obj)
         votes = Vote.objects.filter(
             content_type__pk=obj_type.id,
@@ -44,12 +50,15 @@ class TenderSerializer(serializers.ModelSerializer):
         return votes.count()
 
     def get_like_count(self, obj):
+        """Получение количества лайков к предложению."""
         return self._calculate_votes_count(obj, True)
 
     def get_dislike_count(self, obj):
+        """Получение количества дизлайков к предложению."""
         return self._calculate_votes_count(obj, False)
 
     def get_comment_count(self, obj):
+        """Получение количества комментариев к предложению."""
         return Comment.objects.filter(tender=obj).count()
 
 

@@ -4,6 +4,7 @@ from django.db import migrations
 
 
 def create_comments(apps, schema_editor):
+    """Создание комментариев для теста."""
     comments = [
         'Супер!',
         'Я в деле!',

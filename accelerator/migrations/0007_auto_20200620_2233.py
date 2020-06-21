@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def create_tenders(apps, schema_editor):
-    """Создание предложений."""
+    """Создание предложений для тестов."""
     tenders = [
         {
             'caption': 'Корпоративу быть!',

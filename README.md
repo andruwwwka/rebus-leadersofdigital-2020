@@ -17,6 +17,8 @@
  
 ## Ресурсы и демонстрационные материалы
  
+[Презентация решения](https://drive.google.com/file/d/1fIj-vB-q0hPRVvg63zHHjQiR28VmgUYf/view?usp=sharing).
+
 Макеты реализованы в axure. С ними можно ознакомиться по [адресу](https://ueqyau.axshare.com/#g=1&p=rebus_19_06_20). Пароль: **Rebus190620**.
 
 Приложение доступно по [адресу](https://ilya-pro.github.io/rebus-hackathon-gh-pages/)

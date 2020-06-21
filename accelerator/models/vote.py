@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Vote(models.Model):
+    """Модель для хранения голосов."""
     interestingly = models.BooleanField(
         verbose_name='Интересно',
     )

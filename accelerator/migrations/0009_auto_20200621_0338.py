@@ -5,7 +5,7 @@ from django.db import migrations
 
 
 def create_votes_for_tenders(apps, schema_editor):
-    """Создание лайков и дизлайков к тендерам."""
+    """Создание тестовых лайков и дизлайков к тендерам."""
     Tender = apps.get_model('accelerator', 'Tender')
     Profile = apps.get_model('users', 'Profile')
     Vote = apps.get_model('accelerator', 'Vote')

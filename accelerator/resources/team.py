@@ -1,17 +1,18 @@
-from rest_framework import serializers, viewsets, permissions
+from rest_framework import serializers, viewsets
 
 from accelerator.models import Team
 from users.models import Profile
 
 
 class PartnerSerializer(serializers.ModelSerializer):
+    """Сериалайзер для объекта члена команды."""
     class Meta:
         model = Profile
         fields = ['last_name', 'first_name', 'patronymic']
 
 
 class DetailTeamSerializer(serializers.ModelSerializer):
-    """Сериализатор команды для создания/обновления объекта"""
+    """Сериализатор команды для создания/обновления объекта."""
 
     class Meta:
         model = Team
@@ -19,7 +20,7 @@ class DetailTeamSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(DetailTeamSerializer):
-    """Сериализатор команды"""
+    """Сериализатор команды."""
     leader = serializers.SerializerMethodField()
     expert = serializers.SerializerMethodField()
     idea = serializers.SerializerMethodField()
@@ -39,7 +40,8 @@ class TeamSerializer(DetailTeamSerializer):
 
 
 class TeamViewSet(viewsets.ModelViewSet):
-    """Представление команды"""
+    """Представление команды."""
+
     queryset = Team.objects.all()
     available_serializers = {
         'list': TeamSerializer,
@@ -52,7 +54,7 @@ class TeamViewSet(viewsets.ModelViewSet):
     }
 
     def get_serializer_class(self):
-        """выбор сериализатора"""
+        """Выбор сериализатора."""
         if self.action not in self.available_serializers:
             raise RuntimeError(f'Action {self.action} does not supported')
         serializer_class = self.available_serializers[self.action]

@@ -1,6 +1,6 @@
 from django.db import models
 
-from accelerator.models import Team, Tender
+from accelerator.models import Tender
 
 
 class Round(models.Model):
